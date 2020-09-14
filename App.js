@@ -1,14 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import SignupLoginScreen from './screens/SignupLoginScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends React.Component{
+  render(){
+    return(
+      <View>
+        <Text>Hi! This is the barter system app. Please login or signup...</Text>
+        <SignupLoginScreen />
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
