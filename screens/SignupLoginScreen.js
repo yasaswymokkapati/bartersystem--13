@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
+import AppHeader from '../components/AppHeader';
 
 export default class SignupLoginScreen extends React.Component{
     constructor () {
@@ -39,6 +40,7 @@ export default class SignupLoginScreen extends React.Component{
         firebase.auth().signInWithEmailAndPassword(emailID, password)
         .then(()=>{
             return Alert.alert("User logged in")
+            this.props.navigation.navigate('Home')
         })
         .catch(error=>{
             var errorCode = error.code
@@ -143,6 +145,7 @@ export default class SignupLoginScreen extends React.Component{
   render(){
     return(
       <View style = {styles.container}>
+          <AppHeader title = {"Barter System"}/>
           <View style = {{justifyContent : 'center', alignItems : 'center'}}>
             {this.showModal()}
           </View>

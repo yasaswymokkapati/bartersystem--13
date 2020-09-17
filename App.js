@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SignupLoginScreen from './screens/SignupLoginScreen';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import  { AppTabNavigator } from './components/AppTabNavigator'
 
 export default class App extends React.Component{
   render(){
@@ -13,6 +15,11 @@ export default class App extends React.Component{
   }
 }
 
+const 
+AppTabNavigation = createSwitchNavigator({
+  SignupLoginScreen : {screen : SignupLoginScreen},
+  BottomNavigator : { screens : AppTabNavigator}
+})
 const styles = StyleSheet.create({
   container: {
     flex: 1,
