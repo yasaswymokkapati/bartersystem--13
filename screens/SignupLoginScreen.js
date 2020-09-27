@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
-import AppHeader from '../components/AppHeader';
+import {AppHeader} from '../components/AppHeader';
 
 export default class SignupLoginScreen extends React.Component{
     constructor () {
@@ -26,11 +26,11 @@ export default class SignupLoginScreen extends React.Component{
             firebase.auth().createUserWithEmailAndPassword(emailID, password)
         .then (()=>{
         db.collection('User').add({
-            first_name : this.state.firstName,
-            last_name : this.state.lastName,
-            contact : this.state.contact,
-            address : this.state.address,
-            emailID : this.state.emailID
+            'first_name' : this.state.firstName,
+            'last_name' : this.state.lastName,
+            'contact' : this.state.contact,
+            'address' : this.state.address,
+            'emailID' : this.state.emailID
         })
         return Alert.alert( "User added successfully")
     })

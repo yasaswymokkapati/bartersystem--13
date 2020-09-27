@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
-import AppHeader from '../components/AppHeader';
+import {AppHeader} from '../components/AppHeader';
 
 export default class extends React.Component{
     constructor(){
@@ -14,7 +14,7 @@ export default class extends React.Component{
         }
     }
     createUniqueID(){
-        var uniqueID = Math.random().toString(36).substring(7)
+        var uniqueID = Math.random().toString(36).substring(5)
     }
     addExchange = (itemName, description)=>{
         var userID = this.state.userID
