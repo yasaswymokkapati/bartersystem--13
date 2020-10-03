@@ -64,7 +64,7 @@ export default class MyBarters extends React.Component{
             }else{
                message =  this.state.donorName  + " has shown interest in donating the book"
             }
-            db.collection("all_notifications").doc(doc.id).update({
+            db.collection("All_notifications").doc(doc.id).update({
               "message": message,
               "notification_status" : "unread",
               "date"                : firebase.firestore.FieldValue.serverTimestamp()

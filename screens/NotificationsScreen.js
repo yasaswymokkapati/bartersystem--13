@@ -4,6 +4,7 @@ import db from '../config';
 import firebase from 'firebase';
 import AppHeader from '../components/AppHeader';
 import { ListItem, Icon } from 'react-native-elements';
+import SwipeableFlatList from '../components/SwipeableFlatList';
 
 export default class Notification extends React.Component{
         constructor(props) {
@@ -61,6 +62,7 @@ export default class Notification extends React.Component{
         <View style={{flex:0.1}}>
           <AppHeader title={"Notifications"} navigation={this.props.navigation}/>
         </View>
+        <SwipeableFlatList />
         <View style={{flex:0.9}}>
           {
             this.state.allNotifications.length === 0
