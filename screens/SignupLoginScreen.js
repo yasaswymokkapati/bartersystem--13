@@ -30,7 +30,8 @@ export default class SignupLoginScreen extends React.Component{
             'last_name' : this.state.lastName,
             'contact' : this.state.contact,
             'address' : this.state.address,
-            'emailID' : this.state.emailID
+            'emailID' : this.state.emailID,
+            'isExchangeRequestActive' : false
         })
         return Alert.alert( "User added successfully")
     })

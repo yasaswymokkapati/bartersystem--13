@@ -10,7 +10,12 @@ export default class extends React.Component{
         this.state = {
             userID : firebase.auth().currentUser.email,
             itemName : '',
-            description : ''
+            description : '',
+            requestID : '',
+            requestedItemName : '',
+            itemStatus : '',
+            docId : '',
+            isExchangeRequestActive : '',
         }
     }
     createUniqueID(){
@@ -25,13 +30,88 @@ export default class extends React.Component{
             'item_name' : this.state.itemName,
             'description' : this.state.description
         })
-        this.setState({
-            itemName : '',
-            description : ''
+        
+        await this.getItemRequest()
+    db.collection('User').where('emailID', '==', userID).get()
+    .then()
+    .then(snapshot=>{
+        snapshot.forEach(doc=>{
+            db.collection('User').doc(doc.id).update({
+                'isExchangeRequestActive' : true
+            })
         })
-        return Alert.alert("Exchange Requested Successfully")
-    }
+    })
+    this.setState({
+        itemName : '',
+        reason : ''
+    })
+    return Alert.alert("Item Requested Successfully")
+}
+getBookRequest = ()=>{
+    var itemRequest = db.collection('Exchange_items').where('user_ID', '==', this.state.userID).get()
+    .then(snapshot=>{
+        snapshot.forEach(doc=>{
+            if(doc.data().item_status !== 'recieved'){
+                this.setState({
+                    requestID : doc.data().request_ID,
+                    requestedItemName : doc.data().item_name,
+                    itemStatus : doc.data().item_status,
+                    docId : doc.id
+                })
+            }
+        })
+    })
+}
+getIsBookRequestActive = ()=>{
+    db.collection('User').where('emailID', '==', this.state.userID)
+    .onSnapshot(querySnapShot=>{
+        this.setState({
+            isExchangeRequestActive : doc.data().isExchangeRequestActive,
+            docId : doc.id
+        })
+    })
+}
+
+updateBookStatus = ()=>{
+    db.collection('Exchange_items').doc(this.state.docId).update({
+        'item_status' : 'recieved'
+    })
+    db.collection('User').where('email_id', '==', this.state.userID).get()
+    .then(snapshot =>{
+        snapshot.forEach(doc=>{
+            db.collection('User').doc(doc.id).update({
+                'isExchangeRequestActive' : false 
+            })
+        })
+    })
+}
+
+sendNotification = ()=>{
+    db.collection('User').where('emailID', '==', this.state.userID).get()
+    .then(snapshot=>{
+        snapshot.forEach(doc=>{
+            var name = doc.data().first_name
+            var lastName = doc.data().last_name
+
+            db.collection('All_notifications').where('request_id', '==', this.state.requestID).get()
+            .then(snapshot=>{
+                snapshot.forEach(doc=>{
+                    var donorId = doc.data().donor_id
+                    var bookTitle = doc.data.book_title
+
+                    db.collection('All_notifications').add({
+                        'targeted_user_id' : donorId,
+                        'message' : name + ' ' + lastName + ' received the book ' + bookTitle,
+                        'notification_status' : 'unread',
+                        'item_name' : itemName
+                    })
+                })
+            })
+        })
+    })
+}
     render(){
+        if(this.state.isExchangeRequestActive === true){
         return(
             <View style = {{flex : 1, justifyContent : 'center', alignItems : 'center'}}>
                 <AppHeader title = {"ExchangeScreen"}/>
@@ -56,7 +136,58 @@ export default class extends React.Component{
                 <TouchableOpacity style = {styles.button} onPress = {()=>{
                     this.exchange()
                 }}><Text>Add item</Text></TouchableOpacity>
+                <View style = {{flex : 1, justifyContent : 'center'}}>
+                    <View style = {{borderColor : 'black', borderWidth : 2, justifyContent : 'center', alignItems : 'center',
+                padding : 10}}>
+                            <Text>Item Name</Text>
+                            <Text>{this.state.requestedItemName}</Text>
+                    </View>
+                    <View style = {{borderColor : 'black', borderWidth : 2, justifyContent : 'center', alignItems : 'center',
+                padding : 10}}>
+                        <Text>Item Status</Text>
+                            <Text>{this.state.itemStatus}</Text>
+                    </View>
+                    <TouchableOpacity style = {styles.button} onPress = {()=>{
+                        this.updateBookStatus()
+                        this.sendNotification()
+                    }}><Text>I recieved the book</Text></TouchableOpacity>
+                </View>
             </View>
         )
+    }
+    else{
+        return(
+        <View style = {{flex : 1}}>
+                <MyHeader title = "Book Request" navigation = {this.props.navigation()}/>
+                <ScrollView>
+                    <KeyboardAvoidingView style = {styles.keyboardStyle}>
+                        <TextInput 
+                        style = {styles.inputBox}
+                        placeholder = "Enter Book Name"
+                        onChangeText = {(text)=>{
+                            this.setState({
+                                bookTitle : text,
+                            })
+                        }
+                    }
+                    value = {this.state.bookTitle}/>
+
+                        <TextInput 
+                        style = {styles.inputBox}
+                        multiline
+                        numberOfLines = {8}
+                        placeholder = "Why do you need the book"
+                        onChangeText = {(text)=>{
+                            this.setState({
+                                reason : text,
+                            })
+                        }
+                    }
+                    value = {this.state.reason}/>
+                    </KeyboardAvoidingView>
+                </ScrollView>
+            </View>
+        )
+    }
     }
 }

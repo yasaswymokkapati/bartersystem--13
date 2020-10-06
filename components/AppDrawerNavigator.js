@@ -4,7 +4,8 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import SideBarMenu from './SideBarMenu';
 import SettingsScreen from '../screens/SettingsScreen';
 import MyBarters from '../screens/MyBarters';
-import Notification from '../screens/NotificationsScreen'
+import Notification from '../screens/NotificationsScreen';
+import MyReceivedItemsScreen from '../screens/MyRecievedItemsScreen';
 
 export const AppDrawerNavigator = createDrawerNavigator ({
     Home : {
@@ -18,6 +19,9 @@ export const AppDrawerNavigator = createDrawerNavigator ({
     },
     Notification : {
         screen : Notification
+    },
+    MyRecievedItemsScreen : {
+        screen : MyReceivedItemsScreen
     }
 },
 {
