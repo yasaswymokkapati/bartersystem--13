@@ -16,6 +16,8 @@ export default class extends React.Component{
             itemStatus : '',
             docId : '',
             isExchangeRequestActive : '',
+            currencyCode : '',
+            rate : ''
         }
     }
     createUniqueID(){
@@ -72,6 +74,16 @@ getIsBookRequestActive = ()=>{
     })
 }
 
+getCountryCode = ()=>{
+    db.collection('User').where('emailID', '==', this.state.userID)
+    .onSnapshot(querySnapShot=>{
+        this.setState({
+            currencyCode : doc.data().isExchangeRequestActive,
+            docId : doc.id
+        })
+    })
+}
+
 updateBookStatus = ()=>{
     db.collection('Exchange_items').doc(this.state.docId).update({
         'item_status' : 'recieved'
@@ -82,6 +94,21 @@ updateBookStatus = ()=>{
             db.collection('User').doc(doc.id).update({
                 'isExchangeRequestActive' : false 
             })
+        })
+    })
+}
+
+getData(){
+    fetch('http://data.fixer.io/api/latest?access_key=7bbb0e9fa21a8ce9f2030430604956dc')
+    .then(response=>{
+        return response.json()
+    }).then(responseData=>{
+        var currencyCode = this.state.currencyCode
+        var currency = responseData.rates.INR
+        var value = 69/currency
+
+        this.setState({
+            rate : value
         })
     })
 }
@@ -97,7 +124,7 @@ sendNotification = ()=>{
             .then(snapshot=>{
                 snapshot.forEach(doc=>{
                     var donorId = doc.data().donor_id
-                    var bookTitle = doc.data.book_title
+                    var itemName = doc.data.item_name
 
                     db.collection('All_notifications').add({
                         'targeted_user_id' : donorId,
@@ -141,6 +168,11 @@ sendNotification = ()=>{
                 padding : 10}}>
                             <Text>Item Name</Text>
                             <Text>{this.state.requestedItemName}</Text>
+                    </View>
+                    <View style = {{borderColor : 'black', borderWidth : 2, justifyContent : 'center', alignItems : 'center',
+                padding : 10}}>
+                            <Text>Item Value</Text>
+                            <Text>{this.state.rate}</Text>
                     </View>
                     <View style = {{borderColor : 'black', borderWidth : 2, justifyContent : 'center', alignItems : 'center',
                 padding : 10}}>

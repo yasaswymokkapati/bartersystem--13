@@ -16,6 +16,7 @@ export default class SignupLoginScreen extends React.Component{
             address : '',
             contact : '',
             confirmPassword : '',
+            currencyCode : '',
         }
     }
     userSignup = (emailID, password, confirmPassword)=>{
@@ -31,7 +32,8 @@ export default class SignupLoginScreen extends React.Component{
             'contact' : this.state.contact,
             'address' : this.state.address,
             'emailID' : this.state.emailID,
-            'isExchangeRequestActive' : false
+            'isExchangeRequestActive' : false,
+            'currencyCode' : this.state.currencyCode
         })
         return Alert.alert( "User added successfully")
     })
@@ -75,6 +77,15 @@ export default class SignupLoginScreen extends React.Component{
                             onChangeText = {(text)=>{
                                 this.setState({
                                     lastName : text
+                                })
+                            }}/>
+                            <TextInput 
+                            style = {styles.inputBox}
+                            placeholder = {'Currency Code'}
+                            maxLength = {10}
+                            onChangeText = {(text)=>{
+                                this.setState({
+                                    currencyCode : text
                                 })
                             }}/>
                             <TextInput 
