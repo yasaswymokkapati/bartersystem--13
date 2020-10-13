@@ -4,6 +4,7 @@ import { Header, Card, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import db from '../config';
 import {AppHeader} from '../components/AppHeader';
+import {RFValue} from 'react-native-response-fontsize';
 
 export default class RecieverDetailScreen extends React.Component{
     constructor(props){
@@ -74,13 +75,13 @@ addNotification = ()=>{
                     leftComponent = {<Icon name = 'arrow-left' type = 'feather' color = 'black' onPress = {()=>
                     this.props.navigation.goBack()
                         }/>}
-                    centerComponent = {{text : 'donate Items', style : {color : 'black', fontSize : 20, fontWeight : 'bold',
+                    centerComponent = {{text : 'donate Items', style : {color : 'black', fontSize : RFValue(20), fontWeight : 'bold',
                     backgroundColor : 'yellow'}}}/>
                 </View>
                 <View style = {{flex : 0.3}}>
                     <Card
                     title = {"Item Information"}
-                    titleStyle = {{fontSize : 20}}>
+                    titleStyle = {{fontSize : RFValue(20)}}>
                     </Card>
                     <Card>
                     <Text style = {{fontWeight : "bold"}}>Name : {this.state.itemName}</Text>
@@ -91,7 +92,7 @@ addNotification = ()=>{
                     <View style  = {{flex : 0.3}}>
                         <Card
                         title = {"Reciever information"}
-                        titleStyle = {{fontSize : 20}}>
+                        titleStyle = {{fontSize : RFValue(20)}}>
                             <Card>
                             <Text style = {{fontWeight : "bold"}}>Name : {this.state.recieverName}</Text>
                             </Card>

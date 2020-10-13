@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, View, Input, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import db from '../config';
 import firebase from 'firebase';
 import {AppHeader} from '../components/AppHeader';
+import {RFValue} from 'react-native-response-fontsize';
 
 export default class BookDonateScreen extends React.Component{
     constructor(){
@@ -53,7 +54,7 @@ renderItem = ({item, i})=>{
                     {this.state.requestedItemsList.length === 0
                     ? (
                         <View style = {styles.subContainer}>
-                            <Text style = {{fontSize : 20}}>List of all requested Items</Text>
+                            <Text style = {{fontSize : RFValue(20)}}>List of all requested Items</Text>
                         </View>
                     )
                     : (

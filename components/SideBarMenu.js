@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { DrawerItems } from 'react-navigation-drawer';
-import {Avatar} from 'react-native-elements';
+import {Avatar, Icon} from 'react-native-elements';
+import {RFValue} from'react-native-response-fontsize';
 import * as ImagePicker from 'expo-image-picker';
 import firebase from 'firebase';
 import db from '../config';
@@ -72,13 +73,13 @@ componentDidMount(){
                     source = {{
                         uri : this.state.image
                     }}
-                    size = "medium"
+                    size = "xlarge"
                     onPress = {()=>{
                         this.selectPicture()
                     }}
                     containerStyle = {styles.imageContainer}
                     showEditButton/>
-                    <Text style = {{fontWeight : "bold", fontSize : 20, paddingTop : 10}}>{this.state.name}</Text>
+                    <Text style = {{fontWeight : "bold", fontSize : RFValue(20), paddingTop : 10}}>{this.state.name}</Text>
                 </View>
                 <View style = {styles.DIContainer}>
                     <DrawerItems 
@@ -89,7 +90,12 @@ componentDidMount(){
                     onPress = {()=>{
                         this.props.navigation.navigate('SignupLoginScreen')
                         firebase.auth().signOut()
-                    }}><Text style = {styles.logout}>Logout</Text></TouchableOpacity>
+                    }}>
+                        <Icon name = "logout"
+                        type = "antdesign"
+                        size = {RFvalue(20)}
+                        iconStyle = {{paddingLeft : RFValue(10)}}/>
+                        <Text style = {styles.logout}>Logout</Text></TouchableOpacity>
                 </View>
             </View>
         )

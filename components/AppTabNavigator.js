@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView, Image} from 'react-native';
+import { StyleSheet, Text, View, Input, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView, Image} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import db from '../config';
 import firebase from 'firebase';

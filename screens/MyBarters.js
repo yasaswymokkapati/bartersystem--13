@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import {AppHeader} from '../components/AppHeader';
+import {RFValue} from 'react-native-response-fontsize';
 
 export default class MyBarters extends React.Component{
     constructor(){
@@ -97,7 +98,7 @@ renderItem = ({item, i})=>{
                     {this.state.requestedItemsList.length === 0
                     ? (
                         <View style = {styles.subContainer}>
-                            <Text style = {{fontSize : 20}}>List of all requested Items</Text>
+                            <Text style = {{fontSize : RFValue(20)}}>List of all requested Items</Text>
                         </View>
                     )
                     : (

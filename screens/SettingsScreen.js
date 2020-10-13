@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {AppHeader} from '../components/AppHeader';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { Input, TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class SettingsScreen extends React.Component{
     constructor(){
@@ -48,7 +48,7 @@ componentDidMount(){
             <View style = {styles.container}>
                 <AppHeader title = "Profile Settings" navigation = {this.props.navigation()}/>
                 <View style = {styles.fontContainer}>
-                    <TextInput 
+                    <Input 
                     style = {styles.inputBox} 
                     placeholder = {"First Name"}
                     maxLength = {8}
@@ -58,7 +58,7 @@ componentDidMount(){
                         })
                     }}
                     value = {this.state.firstName}/>
-                    <TextInput 
+                    <Input 
                     style = {styles.inputBox} 
                     placeholder = {"Last Name"}
                     maxLength = {8}
@@ -68,7 +68,7 @@ componentDidMount(){
                         })
                     }}
                     value = {this.state.lastName}/>
-                    <TextInput 
+                    <Input 
                     style = {styles.inputBox} 
                     placeholder = {"Contact"}
                     keyboardType = "numeric"
@@ -79,7 +79,7 @@ componentDidMount(){
                         })
                     }}
                     value = {this.state.contact}/>
-                    <TextInput 
+                    <Input 
                     style = {styles.inputBox} 
                     placeholder = {"Address"}
                     multiline

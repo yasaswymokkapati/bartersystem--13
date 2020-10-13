@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Header, Icon, Badge} from 'react-native-elements';
 import { StyleSheet, Text, View, Alert} from 'react-native';
 import db from '../config';
-import firebase from 'firebase'
+import firebase from 'firebase';
+import {RFValue} from 'react-native-response-fontsize';
 
 const BellIconWithBadge = (props)=>{
 
@@ -21,7 +22,7 @@ const MyHeader = props=>{
         rightComponent = {<BellIconWithBadge {...this.props}/>}
         leftComponent = {<Icon name = {"bars"} type = "font-awesome" color  = "pink" 
             onPress = {()=>props.navigation.toggleDrawer()}/>}
-        centerComponent = {{text : props.title, style : {color : "white"}, fontSize : 20, fontWeight : 'bold'}}
+        centerComponent = {{text : props.title, style : {color : "white"}, fontSize : RFValue(20), fontWeight : 'bold'}}
         backgroundColor = "purple"/>
     )
 }

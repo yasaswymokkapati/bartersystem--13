@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, View, Input, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import db from '../config';
+import {Icon} from 'react-native-elements';
 import firebase from 'firebase';
 import {AppHeader} from '../components/AppHeader';
+import {RFValue} from 'react-native-response-fontsize';
 
 export default class SignupLoginScreen extends React.Component{
     constructor () {
@@ -60,8 +62,16 @@ export default class SignupLoginScreen extends React.Component{
                 <View style = {styles.modalContainer}>
                     <ScrollView style = {{width : '100%'}}>
                         <KeyboardAvoidingView style = {styles.kbView}>
+                            <Icon 
+                            type = "font-awesome"
+                            name = "cancel"
+                            onPress = {()=>{
+                                this.setState({
+                                    isModalVisible : false
+                                })
+                            }}/>
                             <Text style = {styles.modalTitle}>Registration</Text>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'First Name'}
                             maxLength = {10}
@@ -70,7 +80,7 @@ export default class SignupLoginScreen extends React.Component{
                                     firstName : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Last Name'}
                             maxLength = {10}
@@ -79,7 +89,7 @@ export default class SignupLoginScreen extends React.Component{
                                     lastName : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Currency Code'}
                             maxLength = {10}
@@ -88,7 +98,7 @@ export default class SignupLoginScreen extends React.Component{
                                     currencyCode : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Contact'}
                             maxLength = {10}
@@ -98,7 +108,7 @@ export default class SignupLoginScreen extends React.Component{
                                     contact : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Address'}
                             multiline = {true}
@@ -107,7 +117,7 @@ export default class SignupLoginScreen extends React.Component{
                                     address : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Email ID'}
                             keyboardType = {"email-address"}
@@ -116,7 +126,7 @@ export default class SignupLoginScreen extends React.Component{
                                     emailID : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Password'}
                             secureTextEntry = {true}
@@ -125,7 +135,7 @@ export default class SignupLoginScreen extends React.Component{
                                     password : text
                                 })
                             }}/>
-                            <TextInput 
+                            <Input 
                             style = {styles.inputBox}
                             placeholder = {'Confirm Passowrd'}
                             secureTextEntry = {true}
@@ -162,7 +172,7 @@ export default class SignupLoginScreen extends React.Component{
             {this.showModal()}
           </View>
         <Text>Hello! Welcome</Text>
-        <TextInput style = {styles.inputBox}
+        <Input style = {styles.inputBox}
         placeholder = {"Email ID"}
         keyboardType = 'email-address'
         onChangeText = {(text)=>{
@@ -172,7 +182,7 @@ export default class SignupLoginScreen extends React.Component{
         }}
         value = {this.state.emailID}/>
         
-        <TextInput style = {styles.inputBox}
+        <Input style = {styles.inputBox}
         placeholder = {"Password"}
         secureTextEntry = {true}
         onChangeText = {(text)=>{
@@ -210,7 +220,7 @@ const styles = StyleSheet.create({
       height : 50,
       borderBottomWidth : 1.5,
       borderColor : 'black',
-      fontSize : 20,
+      fontSize : RFValue(20),
       margin : 10,
       paddingLeft : 10
   },
@@ -233,7 +243,7 @@ const styles = StyleSheet.create({
   buttonText : {
       color  :'black',
       fontWeight : "bold",
-      fontSize : 20
+      fontSize : RFValue(20)
   },
   modalContainer : {
       backgroundColor : 'white',
@@ -259,6 +269,6 @@ const styles = StyleSheet.create({
 ModalButtonText : {
     color  :'black',
     fontWeight : "bold",
-    fontSize : 20
+    fontSize : RFValue(20)
 },
 });

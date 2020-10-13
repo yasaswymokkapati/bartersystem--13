@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, View, Input, TouchableOpacity, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
 import {AppHeader} from '../components/AppHeader';
@@ -142,7 +142,7 @@ sendNotification = ()=>{
         return(
             <View style = {{flex : 1, justifyContent : 'center', alignItems : 'center'}}>
                 <AppHeader title = {"ExchangeScreen"}/>
-                <TextInput
+                <Input
                 style = {styles.inputBox}
                 placeholder = {'Item name'}
                 onChangeText = {(text)=>{
@@ -150,7 +150,7 @@ sendNotification = ()=>{
                         itemName : text
                     })
                 }}/>
-                <TextInput
+                <Input
                 style = {styles.inputBox}
                 placeholder = {'Description'}
                 multiline
@@ -193,7 +193,7 @@ sendNotification = ()=>{
                 <MyHeader title = "Book Request" navigation = {this.props.navigation()}/>
                 <ScrollView>
                     <KeyboardAvoidingView style = {styles.keyboardStyle}>
-                        <TextInput 
+                        <Input 
                         style = {styles.inputBox}
                         placeholder = "Enter Book Name"
                         onChangeText = {(text)=>{
@@ -204,7 +204,7 @@ sendNotification = ()=>{
                     }
                     value = {this.state.bookTitle}/>
 
-                        <TextInput 
+                        <Input 
                         style = {styles.inputBox}
                         multiline
                         numberOfLines = {8}
